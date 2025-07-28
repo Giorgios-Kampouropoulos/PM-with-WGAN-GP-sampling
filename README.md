@@ -10,8 +10,8 @@ In industrial settings, machine failures are rare events. This leads to highly i
 
 The goal of this project was to:
 1.  Implement and evaluate different sampling methods to rebalance the dataset.
-2.  Compare the performance of two classification models (Random Forest and SVM) trained on these rebalanced datasets.
-3.  Assess the viability of using a GAN (specifically a WPGAN-GP via the TabGAN library) to generate high-quality synthetic data for the minority class.
+2.  Compare the performance of two classification models (**Random Forest** and **SVM**) trained on these rebalanced datasets.
+3.  Assess the viability of using a GAN (specifically a **WPGAN-GP** via the TabGAN library) to generate high-quality synthetic data for the minority class.
 
 ## 📊 The Dataset
 
