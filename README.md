@@ -15,7 +15,7 @@ The goal of this project was to:
 
 ## 📊 The Dataset
 
-This project uses the **AI4I 2020 Predictive Maintenance Dataset**. It's a synthetic dataset that simulates real-world predictive maintenance scenarios and was created for this purpose.
+This project uses the **AI4I 2020 Predictive Maintenance Dataset** (with a small change in the feature columns). It's a synthetic dataset that simulates real-world predictive maintenance scenarios and was created for this purpose.
 
 -   **Source:** [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/601/ai4i+2020+predictive+maintenance+dataset)
 -   **Reference Paper:** [Explainable Artificial Intelligence for Predictive Maintenance Applications](https://ieeexplore.ieee.org/document/9268676) by Matzka, S.
@@ -43,7 +43,7 @@ To replicate the analysis, please follow these steps:
     cd your-project-name
     ```
 
-2.  **Set up a virtual environment (recommended):**
+2.  **Set up a virtual environment (recommended, i personally used Anaconda):**
     ```bash
     python -m venv venv
     source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
@@ -72,8 +72,12 @@ The project is organized to be clear and accessible:
 
 ## 📈 Key Findings
 
-*(This is a placeholder for you to fill in with your specific results!)*
+My analysis demonstrated that WGAN-GP for minority class data augmentation can be a great re-sampling technique, provided that you do not treat it like a black box. 
 
-My analysis demonstrated that the choice of sampling technique has a significant impact on model performance. The WPGAN-GP method, in particular, showed promising results, often leading to a better balance between precision and recall for the minority class compared to traditional methods like SMOTE. This suggests that generating high-quality synthetic data is a powerful and viable strategy for tackling severe class imbalance in predictive maintenance applications.
+During my first implementation, i used a Single-GAN architecture to oversample the minority class (the failures), meaning that the model tried to learn the distribution of all the failure types at once, missing critical information. 
+
+When i switched the architecture to a Multi-GAN structure (one GAN per failure type == 4 GANs), then the AUC ROC score exceeded the baseline's (no re-sampling and class_weight='Balanced'), as the second model tried to learn the distribution of each failure type separately and managed to produce more realistic synthetic data.
+
+The key takeaway is that a lot of attention should be payed to the math (or at least the logic) of each algorithm in order for informed decisions to be made. 
 
 For detailed metrics, confusion matrices, and visualizations, please see the final sections of the notebooks.
