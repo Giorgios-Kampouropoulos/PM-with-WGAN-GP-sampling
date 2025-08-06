@@ -31,7 +31,7 @@ To tackle the class imbalance, I implemented four distinct sampling strategies b
 3.  **SMOTE (Synthetic Minority Over-sampling Technique):** A popular oversampling method that creates new minority class instances by interpolating between existing ones.
 4.  **WPGAN-GP (Wasserstein GAN with Gradient Penalty):** A sophisticated deep learning approach. I used the `TabGAN` library to train a Generative Adversarial Network on the minority class data. The GAN learns the underlying data distribution and generates new, realistic synthetic data points representing machine failures.
 
-These rebalanced training datasets were then used to train a **Random Forest Classifier** and a **Support Vector Machine (SVM)**. Their performance was evaluated on a common, untouched test set.
+These rebalanced training datasets were then used to train a **Random Forest Classifier** and a **Support Vector Machine (SVM)**. Their performance was evaluated on a common, untouched test set. The Hyperparameters of the GAN where optimized with Optuna's TPESampler, with respect to the RF ROC AUC. A very simple/shallow RF parameter grid was used throughout this project to keep the run time as low as possible, given my hardware limitations.
 
 ## 🚀 How to Run This Project
 
@@ -43,7 +43,7 @@ To replicate the analysis, please follow these steps:
     cd your-project-name
     ```
 
-2.  **Set up a virtual environment (recommended, i personally used Anaconda):**
+2.  **Set up a virtual environment (recommended, i personally used Anaconda packet manager):**
     ```bash
     python -m venv venv
     source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
