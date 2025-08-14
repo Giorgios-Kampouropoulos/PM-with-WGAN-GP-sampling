@@ -29,7 +29,7 @@ To tackle the class imbalance, I implemented four distinct sampling strategies b
 1.  **Baseline (Stratified Sampling):** The original, imbalanced data was split into training and testing sets while preserving the original percentage of samples for each class. This serves as our baseline for comparison.
 2.  **Random Undersampling:** This method balances the dataset by randomly removing samples from the majority class. It's simple, but risks discarding potentially useful information.
 3.  **SMOTE (Synthetic Minority Over-sampling Technique):** A popular oversampling method that creates new minority class instances by interpolating between existing ones.
-4.  **WPGAN-GP (Wasserstein GAN with Gradient Penalty):** A sophisticated deep learning approach. I used the `TabGAN` library to train a Generative Adversarial Network on the minority class data. The GAN learns the underlying data distribution and generates new, realistic synthetic data points representing machine failures.
+4.  **WGAN-GP (Wasserstein GAN with Gradient Penalty):** A sophisticated deep learning approach. I used the `TabGAN` library to train a Generative Adversarial Network on the minority class data. The GAN learns the underlying data distribution and generates new, realistic synthetic data points representing machine failures.
 
 These rebalanced training datasets were then used to train a **Random Forest Classifier** and a **Support Vector Machine (SVM)**. Their performance was evaluated on a common, untouched test set. The Hyperparameters of the GAN where optimized with Optuna's TPESampler, with respect to the RF ROC AUC. A very simple/shallow RF parameter grid was used throughout this project to keep the run time as low as possible, given my hardware limitations.
 
