@@ -76,8 +76,10 @@ My analysis demonstrated that WGAN-GP for minority class data augmentation can b
 
 During my first implementation, i used a Single-GAN architecture to oversample the minority class (the failures), meaning that the model tried to learn the distribution of all the failure types at once, missing critical information. 
 
-When i switched the architecture to a Multi-GAN structure (one GAN per failure type == 4 GANs), then the AUC ROC score exceeded the baseline's (no re-sampling and class_weight='Balanced'), as the second model tried to learn the distribution of each failure type separately and managed to produce more realistic synthetic data.
+When i switched the architecture to a Multi-GAN structure (one GAN per failure type == 4 GANs), then the ROC-AUC and the PR-AUC score exceeded the baseline's (no re-sampling and class_weight='Balanced'), as the second model tried to learn the distribution of each failure type separately and managed to produce more realistic synthetic data.
 
-The key takeaway is that a lot of attention should be payed to the math (or at least the logic) of each algorithm in order for informed decisions to be made. 
+The key takeaway is that a lot of attention should be payed to the math (or at least the logic) of each algorithm in order for informed decisions to be made.
+
+Another takeaway is that when evaluating a model, we should always do our research on what the best metric is for each case. Here, a lot of people would have valued ROC-AUC as the best metric to be used, since it is a general "favorite" in the machine learning community, but our heavy imbalance needed a metric like PR-AUC, which is best for imbalanced classification evaluation. As a result, the GAN hyperparameters where optimized with respect to PR-AUC instead of ROC-AUC.
 
 For detailed metrics, confusion matrices, and visualizations, please see the final sections of the notebooks.
